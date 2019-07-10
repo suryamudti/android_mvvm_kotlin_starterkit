@@ -12,6 +12,8 @@ import com.surya.mvvmsimplifiedcoding.R
 import com.surya.mvvmsimplifiedcoding.data.db.entities.Quote
 import com.surya.mvvmsimplifiedcoding.util.Coroutines
 import com.surya.mvvmsimplifiedcoding.util.toast
+import com.surya.mvvmsimplifiedcoding.util.verticalListStyle
+import kotlinx.android.synthetic.main.quotes_fragment.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -39,8 +41,16 @@ class QuotesFragment : Fragment(),KodeinAware {
 
 
             quotes.observe(this, Observer {
-                context?.toast("Panjang data = ${it.size}")
+                setupNewsList(it)
+
             })
+        }
+    }
+
+    private fun setupNewsList(data: List<Quote>) {
+        rec_quote.apply {
+            verticalListStyle()
+            adapter = QuotesAdapter(data)
         }
     }
 
